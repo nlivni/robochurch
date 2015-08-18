@@ -1,7 +1,14 @@
 @import url(http://fonts.googleapis.com/css?family=VT323);
 
+html {
+    height: 100%;
+    width: 100%;
+}
+
 body {
     background: #0000ff;
+    height: 100%;
+    width: 100%;
 }
 
 #mainframe-container {
@@ -16,4 +23,10 @@ body {
 
 #mainframe-content {
 
+}
+
+#svg {
+    height: 500px;
+    width: 700px;
+    background:teal;
 }
