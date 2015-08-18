@@ -3,11 +3,13 @@
 $(function(){
     $("#mainframe-content").typed({
         strings: ["If you were disconnected right now would you be a zero or a one"],
-        typeSpeed: 0
+        typeSpeed: 0,
+        showCursor: false,
     });
 });
 
-
+var $serverWidth = $('#server-left').width();
+var $serverHeight = $('#server-left').height();
 
 
 

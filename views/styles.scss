@@ -1,0 +1,74 @@
+@import url(http://fonts.googleapis.com/css?family=VT323);
+
+/***** BOOTSTRAP FIX **********/
+
+.container-fluid {
+  margin: 0;
+  padding: 0;
+}
+
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+  margin: 0;
+  padding: 0;
+}
+
+/***** PAGE **********/
+
+body {
+  background: #0000ff;
+}
+
+#mainframe-container {
+  //width: 200px;
+  //height: 512px;
+  //background: #cccccc url("../public/img/mainframe-1.gif");
+  //padding: 5px 200px;
+}
+
+/***** SERVER **********/
+
+#mainframe-content {
+  //width: 200px;
+  //float: left;
+  font-family: 'VT323', 'courier new', 'monospace';
+  font-size:2em;;
+  background:mediumpurple;
+}
+
+#mainframe-content {
+  height:600px;
+  padding: 10px 20px 10px 20px;
+}
+
+.mainframe {
+  display: block;
+  background:red;
+  //width: 700px;
+  height:600px;
+  color:white;
+}
+
+.server-container {
+  height:600px;
+  background: grey;
+  .server-section-top {
+    .server-vent-top {
+      width: 100%;
+      height:100px;
+    }
+  }
+  .server-section-top {
+
+  }
+  .server-section-top {
+
+  }
+
+}
+
+/***** VERTICAL LAYOUT FOR SMALL SCREENS **********/
+@media (max-width: 768px) {
+  body {
+    background: teal;
+  }
+}
