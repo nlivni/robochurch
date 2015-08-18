@@ -3,7 +3,7 @@ require 'haml'
 require 'sinatra/contrib'
 
 get '/' do
-  haml :index
+  erb :index
 end
 
 not_found do
