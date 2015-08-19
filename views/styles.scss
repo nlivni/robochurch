@@ -28,39 +28,38 @@ body {
 /***** SERVER **********/
 
 #mainframe-content {
-  //width: 200px;
-  //float: left;
   font-family: 'VT323', 'courier new', 'monospace';
   font-size:2em;;
   background:mediumpurple;
+  height:100%;
 }
 
 #mainframe-content {
-  height:600px;
+  height:100%;
   padding: 10px 20px 10px 20px;
 }
 
 .mainframe {
   display: block;
   background:red;
-  //width: 700px;
-  height:600px;
   color:white;
 }
 
 .server-container {
-  height:600px;
   background: grey;
   .server-section-top {
     .server-vent-top {
       width: 100%;
       height:100px;
+      background: #000;
     }
   }
-  .server-section-top {
+  .server-section-middle {
+    background: greenyellow;
 
   }
-  .server-section-top {
+  .server-section-bottom {
+    background: pink;
 
   }
 
