@@ -49,18 +49,40 @@ function resizeEnd() {
 }
 
 $(window).resize(function() {
-    resetWindow();
+    //resetWindow();
+    renderRobochurchCSS();
 });
 
 $(document).ready(function() {
-    resetWindow();
+    //resetWindow();
+    renderRobochurchCSS();
+
 });
 
+function topVentHTML(){
+    var numVentHoles = 10;
+    var numVentRows = 3;
+    var ventHoleHTML = '<div class="vent-hole"></div>';
+    for(i=0; i < numVentRows; i++) {
+        var currentRowClass = 'server-vent-top-row';
+        var currentRowID = currentRowClass + '-' + i;
+        console.log('currentRowClass: ' + currentRowClass);
+        console.log('currentRowID: ' + currentRowID);
+        $('.server-vent-top').append('<div id="'+ currentRowID +'" class=" row no-gutter '+ currentRowID +'">');
+        for(j=0; j < numVentHoles; j++) {
+            $('#'+currentRowID).append(ventHoleHTML);
+        }
+        $('.server-vent-top').append('</div>');
+    }
+
+};
 
 function renderRobochurchCSS() {
-    console.log('SCREEN')
-    console.log('$windowWidth: ' + $windowWidth);
-    console.log('$windowWidth:' + $windowHeight);
+    $windowWidth = $(window).width();
+    $windowHeight = $(window).height();
+
+    console.log('SCREEN: ' + 'w: ' + $windowWidth + 'h:' + $windowHeight);
+    console.log('SCREEN: ' + 'w: ' + $windowWidth + 'h:' + $windowHeight);
     $mainframeContainer.height($windowHeight);
     $mainframeContainer.width($windowWidth);
     $content.height($windowHeight - _Margin);
@@ -68,13 +90,12 @@ function renderRobochurchCSS() {
     $serverSectionTop.height($windowHeight * .25);
     $serverSectionMiddle.height($windowHeight * .50);
     $serverSectionBottom.height($windowHeight * .25);
-
+    //topVentHTML();
+    $serverSectionBottom.html('<p>hello</p>');
 }
 
 function renderRobochurchCSSMobile() {
-    console.log('MOBILE');
-    console.log('$windowWidth: ' + $windowWidth);
-    console.log('$windowWidth:' + $windowHeight);
+    console.log('MOBILE: ' + 'w: ' + $windowWidth + 'h:' + $windowHeight);
 }
 
 
