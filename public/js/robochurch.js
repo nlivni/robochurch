@@ -84,7 +84,7 @@ function renderRobochurchCSS() {
     console.log('SCREEN: ' + 'w: ' + $windowWidth + 'h:' + $windowHeight);
     console.log('SCREEN: ' + 'w: ' + $windowWidth + 'h:' + $windowHeight);
     $mainframeContainer.height($windowHeight);
-    $mainframeContainer.width($windowWidth);
+    //$mainframeContainer.width($windowWidth);
     $content.height($windowHeight - _Margin);
     $servers.height($windowHeight);
     $serverSectionTop.height($windowHeight * .25);
