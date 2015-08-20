@@ -18,7 +18,9 @@ var $content = $('#mainframe-content ');
 var $serverSectionTop = $('.server-section-top');
 var $serverSectionMiddle = $('.server-section-middle');
 var $serverSectionBottom = $('.server-section-bottom');
-
+var $serverVentTop = $('.server-vent-top');
+var $serverVentMiddle = $('.server-vent-middle');
+var $serverVentBottom = $('.server-vent-bottom');
 // so window resize is only called once per resize
 var rtime;
 var timeout = false;
@@ -59,23 +61,47 @@ $(document).ready(function() {
 
 });
 
+// should this take arguments for size and # vents and selector to output HTML?
 function topVentHTML(){
-    var numVentHoles = 10;
-    var numVentRows = 3;
+    var numVentHoles = ($serverSectionTop.width()-30) / (30+4);
+    var numVentRows = $serverSectionTop.height() / 21;
+    var outputHTML = '';
     var ventHoleHTML = '<div class="vent-hole"></div>';
     for(i=0; i < numVentRows; i++) {
         var currentRowClass = 'server-vent-top-row';
         var currentRowID = currentRowClass + '-' + i;
         console.log('currentRowClass: ' + currentRowClass);
         console.log('currentRowID: ' + currentRowID);
-        $('.server-vent-top').append('<div id="'+ currentRowID +'" class=" row no-gutter '+ currentRowID +'">');
+        outputHTML += '<div id="'+ currentRowID +'" class=" row no-gutter '+ currentRowID +'">';
         for(j=0; j < numVentHoles; j++) {
-            $('#'+currentRowID).append(ventHoleHTML);
+            outputHTML += ventHoleHTML;
         }
-        $('.server-vent-top').append('</div>');
+        outputHTML += '</div>';
     }
+    $serverVentTop.html(outputHTML);
+    //$('.vent-hole').height($serverSectionTop.height() / (numVentRows + 1.2));
+}
 
-};
+function middleVentHTML(){
+    var numVentHoles = 4;
+    var numVentRows = 6;
+    var outputHTML = '';
+    var ventHoleHTML = '<div class="vent-hole"></div>';
+
+    for(i=0; i < numVentRows; i++) {
+        var currentRowClass = 'server-vent-side-row row';
+        var currentRowID = currentRowClass + '-' + i;
+        console.log('currentRowClass: ' + currentRowClass);
+        console.log('currentRowID: ' + currentRowID);
+        outputHTML += '<div id="'+ currentRowID +'" class=" row no-gutter '+ currentRowID +'">';
+        for(j=0; j < numVentHoles; j++) {
+            outputHTML += ventHoleHTML;
+        }
+        outputHTML += '</div>';
+    }
+    $serverVentMiddle.append(outputHTML);
+    //$('.vent-hole').width($serverWidth/4);
+}
 
 function renderRobochurchCSS() {
     $windowWidth = $(window).width();
@@ -84,13 +110,13 @@ function renderRobochurchCSS() {
     console.log('SCREEN: ' + 'w: ' + $windowWidth + 'h:' + $windowHeight);
     console.log('SCREEN: ' + 'w: ' + $windowWidth + 'h:' + $windowHeight);
     $mainframeContainer.height($windowHeight);
-    //$mainframeContainer.width($windowWidth);
     $content.height($windowHeight - _Margin);
     $servers.height($windowHeight);
     $serverSectionTop.height($windowHeight * .25);
     $serverSectionMiddle.height($windowHeight * .50);
     $serverSectionBottom.height($windowHeight * .25);
-    //topVentHTML();
+    topVentHTML();
+    middleVentHTML();
     $serverSectionBottom.html('<p>hello</p>');
 }
 
