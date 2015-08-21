@@ -1,5 +1,9 @@
 @import url(http://fonts.googleapis.com/css?family=VT323);
 
+$color-mainframe: #222;
+$color-mainframe-vent: #111;
+$color-screen: #0000FF;
+
 .pixelated {
   -ms-interpolation-mode: nearest-neighbor; // IE 7+ (non-standard property)
   image-rendering: -webkit-optimize-contrast; // Safari 6, UC Browser 9.9
@@ -14,10 +18,15 @@
   padding-left:0;
 }
 
+.vcenter {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+}
 /***** PAGE **********/
 
 body {
-  background: #fff;
+  background: $color-screen;
 }
 
 /***** SERVER **********/
@@ -25,7 +34,7 @@ body {
 #mainframe-content {
   font-family: 'VT323', 'courier new', 'monospace';
   font-size:2em;;
-  background:mediumpurple;
+  background:$color-screen;
   height:100%;
 }
 
@@ -36,7 +45,7 @@ body {
 
 .mainframe {
   display: block;
-  background:red;
+  //background:red;
   color:white;
 }
 
@@ -51,26 +60,61 @@ body {
 
 .server-container {
   padding:0;
-  background: #2a2a2a;
+  background: $color-mainframe;
   .server-section-top {
+    overflow: hidden;
     .server-vent-top {
-      //width: 100%;
       height:100px;
       .vent-hole {
-        height:15px;
-        //width:45px;
-        background:#222;
-        //margin: 2px;
+        height:20px;
+        border:5px solid $color-mainframe;
+        background:$color-mainframe-vent;
         float: left;
       }
     }
   }
   .server-section-middle {
-    background: greenyellow;
+    background: $color-mainframe;
     .server-side-row {
       .server-vent-side {
-        background:plum;
+        background:$color-mainframe;
         height:100%;
+        padding: 10px 0 ;
+        .side-button {
+          width: 100%;
+          height:10px;
+          background: yellow;
+          display: inline-block;
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
+      }
+      .server-monitor-container {
+        padding:0;
+        background:$color-mainframe;
+        height:100%;
+        .server-monitor {
+          height:33.33%;
+          .server-monitor-01 {
+            height:80%;
+            width:80%;
+            background: url("/img/monitor01.gif")  no-repeat, center;
+            background-color: $color-screen;
+            background-size: cover;
+          }
+          .server-monitor-02 {
+            height:80%;
+            width:80%;
+            background: $color-screen url("/img/monitor02.gif") no-repeat center;
+            background-size: cover;
+          }
+          .server-monitor-03 {
+            height:80%;
+            width:80%;
+            background: $color-screen url("/img/monitor03.gif") no-repeat center;
+            background-size: cover;
+          }
+        }
       }
       height:100%;
     }
@@ -87,6 +131,6 @@ body {
 /***** VERTICAL LAYOUT FOR SMALL SCREENS **********/
 @media (max-width: 768px) {
   body {
-    background: teal;
+    background: $color-screen;
   }
 }

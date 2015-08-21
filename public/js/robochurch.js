@@ -24,10 +24,10 @@ var $serverVentTop = $('.server-vent-top');
 var $serverVentMiddle = $('.server-vent-middle');
 var $serverVentBottom = $('.server-vent-bottom');
 
-/*  so window resize is only called once per resize
+/*  so window resize is only called once per resize */
  var rtime;
  var timeout = false;
- var delta = 200;
+ var delta = 100;
 
 function resetWindow() {
     rtime = new Date();
@@ -52,29 +52,14 @@ function resizeEnd() {
         }
     }
 }
-*/
-
-function isDeviceMobile() {
-    if($windowWidth < 768) {
-        return true
-    } else {
-        return false
-    }
-
-}
 
 $(window).resize(function() {
-    //resetWindow();
-    if(isDeviceMobile()) {
-        renderRobochurchCSSMobile();
-    } else {
-        renderRobochurchCSS();
-    }
+    resetWindow();
 });
 
 $(document).ready(function() {
     //resetWindow();
-    if(isDeviceMobile()) {
+    if($windowWidth < 768) {
         renderRobochurchCSSMobile();
     } else {
         renderRobochurchCSS();
@@ -85,6 +70,7 @@ $(document).ready(function() {
 // should this take arguments for size and # vents and selector to output HTML?
 function topVentHTML(){
     var numVentHoles = 3;
+    //var numVentRows = 1;
     var numVentRows = $serverSectionTop.height() / 22;
     var ventHoleWidth = (Math.floor($serverSectionTop.width()) - (5 * numVentHoles))/numVentHoles;
     var outputHTML = '';
@@ -93,42 +79,36 @@ function topVentHTML(){
         var currentRowID = currentRowClass + '-' + i;
         //console.log('currentRowClass: ' + currentRowClass);
         //console.log('currentRowID: ' + currentRowID);
-        outputHTML += '<div id="'+ currentRowID +'" class=" row no-gutter '+ currentRowID +'">';
+        outputHTML += '<div id="'+ currentRowID +'" class=" row  '+ currentRowClass +'">';
         for(var j=0; j < numVentHoles; j++) {
-            outputHTML += '<div class="vent-hole" id="vent-hole-' + i + '-'+ j + '"></div>';
+            outputHTML += '<div class="vent-hole col-sm-4" id="vent-hole-' + i + '-'+ j + '"></div>';
         }
         outputHTML += '</div>';
     }
     $serverVentTop.html(outputHTML);
-    $('.vent-hole').width(ventHoleWidth);
+    //$('.vent-hole').width(ventHoleWidth);
     //$('.vent-hole').height($serverSectionTop.height() / (numVentRows + 1.2));
 }
 
 function middleVentHTML(){
-    var numVentHoles = 4;
-    var numVentRows = 6;
+    var numButtons = Math.floor(($('.server-vent-side').height() - 10) / ($('.server-vent-side').width() + 20));
+    console.log(numButtons);
     var outputHTML = '';
-    var ventHoleHTML = '<div class="vent-hole"></div>';
-
-    for(var i=0; i < numVentRows; i++) {
-        var currentRowClass = 'server-vent-side-row row';
-        var currentRowID = currentRowClass + '-' + i;
-        outputHTML += '<div id="'+ currentRowID +'" class=" row no-gutter '+ currentRowID +'">';
-        for(var j=0; j < numVentHoles; j++) {
-            outputHTML += ventHoleHTML;
-        }
-        outputHTML += '</div>';
+    for(var i=0; i < numButtons; i++) {
+        outputHTML += '<div id="side-button-' + i + '" class="side-button"></div>';
     }
-    $serverVentMiddle.append(outputHTML);
-    //$('.vent-hole').width($serverWidth/4);
+    $('.server-vent-side').html(outputHTML);
+    $('.side-button').height($('.side-button').width());
+    $('.server-monitor').height($('.server-monitor-container').height()/3);
 }
 
 function renderRobochurchCSS() {
+    console.log('SCREEN: ' + 'w: ' + $windowWidth + 'h:' + $windowHeight);
+    $serverLeft.removeClass('hidden-xs');
+    $serverRight.removeClass('hidden-xs');
     $windowWidth = $(window).width();
     $windowHeight = $(window).height();
 
-    console.log('SCREEN: ' + 'w: ' + $windowWidth + 'h:' + $windowHeight);
-    console.log('SCREEN: ' + 'w: ' + $windowWidth + 'h:' + $windowHeight);
     $mainframeContainer.height($windowHeight);
     $content.height($windowHeight - _Margin);
     $servers.height($windowHeight);
@@ -137,12 +117,15 @@ function renderRobochurchCSS() {
     $serverSectionBottom.height($windowHeight * .25);
     topVentHTML();
     middleVentHTML();
-    $serverSectionBottom.html('<p>hello</p>');
+    $serverSectionBottom.html('<p>serverSectionBottom</p>');
 }
 
 function renderRobochurchCSSMobile() {
     console.log('MOBILE: ' + 'w: ' + $windowWidth + 'h:' + $windowHeight);
-    $serverSectionMiddle.addClass('hidden-sm');
+    //$('.mainframe-container').addClass('hidden-xs');
+    $serverLeft.addClass('hidden-xs');
+    $serverRight.addClass('hidden-xs');
+
 }
 
 
