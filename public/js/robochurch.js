@@ -8,12 +8,14 @@ $(function(){
 
 var _Margin = 20;
 
+var $windowWidth = $(window).width();
+var $windowHeight = $(window).height();
 var $serverLeft = $('#server-left');
 var $serverRight = $('#server-right');
 var $servers = $('.server-container');
 var $mainframeContainer = $('.mainframe');
-var $serverWidth = $serverLeft.width();
-var $serverHeight = $serverLeft.height();
+var $serverWidth = Math.floor($serverLeft.width());
+var $serverHeight = Math.floor($serverLeft.height());
 var $content = $('#mainframe-content ');
 var $serverSectionTop = $('.server-section-top');
 var $serverSectionMiddle = $('.server-section-middle');
@@ -21,10 +23,11 @@ var $serverSectionBottom = $('.server-section-bottom');
 var $serverVentTop = $('.server-vent-top');
 var $serverVentMiddle = $('.server-vent-middle');
 var $serverVentBottom = $('.server-vent-bottom');
-// so window resize is only called once per resize
-var rtime;
-var timeout = false;
-var delta = 200;
+
+/*  so window resize is only called once per resize
+ var rtime;
+ var timeout = false;
+ var delta = 200;
 
 function resetWindow() {
     rtime = new Date();
@@ -49,36 +52,55 @@ function resizeEnd() {
         }
     }
 }
+*/
+
+function isDeviceMobile() {
+    if($windowWidth < 768) {
+        return true
+    } else {
+        return false
+    }
+
+}
 
 $(window).resize(function() {
     //resetWindow();
-    renderRobochurchCSS();
+    if(isDeviceMobile()) {
+        renderRobochurchCSSMobile();
+    } else {
+        renderRobochurchCSS();
+    }
 });
 
 $(document).ready(function() {
     //resetWindow();
-    renderRobochurchCSS();
+    if(isDeviceMobile()) {
+        renderRobochurchCSSMobile();
+    } else {
+        renderRobochurchCSS();
+    }
 
 });
 
 // should this take arguments for size and # vents and selector to output HTML?
 function topVentHTML(){
-    var numVentHoles = ($serverSectionTop.width()-30) / (30+4);
-    var numVentRows = $serverSectionTop.height() / 21;
+    var numVentHoles = 3;
+    var numVentRows = $serverSectionTop.height() / 22;
+    var ventHoleWidth = (Math.floor($serverSectionTop.width()) - (5 * numVentHoles))/numVentHoles;
     var outputHTML = '';
-    var ventHoleHTML = '<div class="vent-hole"></div>';
-    for(i=0; i < numVentRows; i++) {
+    for(var i=0; i < numVentRows; i++) {
         var currentRowClass = 'server-vent-top-row';
         var currentRowID = currentRowClass + '-' + i;
-        console.log('currentRowClass: ' + currentRowClass);
-        console.log('currentRowID: ' + currentRowID);
+        //console.log('currentRowClass: ' + currentRowClass);
+        //console.log('currentRowID: ' + currentRowID);
         outputHTML += '<div id="'+ currentRowID +'" class=" row no-gutter '+ currentRowID +'">';
-        for(j=0; j < numVentHoles; j++) {
-            outputHTML += ventHoleHTML;
+        for(var j=0; j < numVentHoles; j++) {
+            outputHTML += '<div class="vent-hole" id="vent-hole-' + i + '-'+ j + '"></div>';
         }
         outputHTML += '</div>';
     }
     $serverVentTop.html(outputHTML);
+    $('.vent-hole').width(ventHoleWidth);
     //$('.vent-hole').height($serverSectionTop.height() / (numVentRows + 1.2));
 }
 
@@ -88,13 +110,11 @@ function middleVentHTML(){
     var outputHTML = '';
     var ventHoleHTML = '<div class="vent-hole"></div>';
 
-    for(i=0; i < numVentRows; i++) {
+    for(var i=0; i < numVentRows; i++) {
         var currentRowClass = 'server-vent-side-row row';
         var currentRowID = currentRowClass + '-' + i;
-        console.log('currentRowClass: ' + currentRowClass);
-        console.log('currentRowID: ' + currentRowID);
         outputHTML += '<div id="'+ currentRowID +'" class=" row no-gutter '+ currentRowID +'">';
-        for(j=0; j < numVentHoles; j++) {
+        for(var j=0; j < numVentHoles; j++) {
             outputHTML += ventHoleHTML;
         }
         outputHTML += '</div>';
@@ -122,6 +142,7 @@ function renderRobochurchCSS() {
 
 function renderRobochurchCSSMobile() {
     console.log('MOBILE: ' + 'w: ' + $windowWidth + 'h:' + $windowHeight);
+    $serverSectionMiddle.addClass('hidden-sm');
 }
 
 

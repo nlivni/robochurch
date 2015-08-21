@@ -1,5 +1,14 @@
 @import url(http://fonts.googleapis.com/css?family=VT323);
 
+.pixelated {
+  -ms-interpolation-mode: nearest-neighbor; // IE 7+ (non-standard property)
+  image-rendering: -webkit-optimize-contrast; // Safari 6, UC Browser 9.9
+  image-rendering: -webkit-crisp-edges; // Safari 7+
+  image-rendering: -moz-crisp-edges; // Firefox 3.6+
+  image-rendering: -o-crisp-edges; // Opera 12
+  image-rendering: pixelated; // Chrome 41+ and Opera 26+
+}
+
 /***** BOOTSTRAP FIX **********/
 .no-gutter [class*="-6"] {
   padding-left:0;
@@ -42,17 +51,16 @@ body {
 
 .server-container {
   padding:0;
-  background: #444;
+  background: #2a2a2a;
   .server-section-top {
     .server-vent-top {
       //width: 100%;
       height:100px;
-      background: #333;
       .vent-hole {
         height:15px;
-        width:30px;
-        background:pink;
-        margin: 2px;
+        //width:45px;
+        background:#222;
+        //margin: 2px;
         float: left;
       }
     }
