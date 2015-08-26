@@ -3,14 +3,24 @@
 $color-mainframe: #222;
 $color-mainframe-vent: #111;
 $color-screen: #0000FF;
+$color-black: #000000;
 
-.pixelated {
+@mixin pixelated() {
   -ms-interpolation-mode: nearest-neighbor; // IE 7+ (non-standard property)
   image-rendering: -webkit-optimize-contrast; // Safari 6, UC Browser 9.9
   image-rendering: -webkit-crisp-edges; // Safari 7+
   image-rendering: -moz-crisp-edges; // Firefox 3.6+
   image-rendering: -o-crisp-edges; // Opera 12
   image-rendering: pixelated; // Chrome 41+ and Opera 26+
+}
+
+@mixin bg-cover() {
+  background: no-repeat center;
+  background-size: cover;
+}
+
+.pixelated {
+  @include pixelated();
 }
 
 /***** BOOTSTRAP FIX **********/
@@ -60,58 +70,83 @@ body {
 
 .server-container {
   padding:0;
-  background: $color-mainframe;
+  background: red;
+  background: url('/img/mainframe-top-container.png');
+  background-size: contain;
   .server-section-top {
     overflow: hidden;
     .server-vent-top {
       height:100px;
-      .vent-hole {
-        height:20px;
-        border:5px solid $color-mainframe;
-        background:$color-mainframe-vent;
-        float: left;
+      .server-vent-top-row {
+        margin:10px;
+        .vent-hole {
+          height:20px;
+          //border:5px solid $color-mainframe;
+          //margin: 1px;
+          background: url('/img/vent-bg.gif');
+          background-size: contain;
+
+          background-origin: content-box;
+          //border: 5px none;
+          //padding: 5px;
+          float: left;
+        }
       }
     }
   }
   .server-section-middle {
-    background: $color-mainframe;
+    background: $color-black;
     .server-side-row {
       .server-vent-side {
-        background:$color-mainframe;
+        background:$color-black;
         height:100%;
         padding: 10px 0 ;
-        .side-button {
+        .side-light {
+          @include pixelated();
           width: 100%;
           height:10px;
-          background: yellow;
+          background: yellow url('/img/btn-bg.gif');
+          background-size: cover;
           display: inline-block;
           margin-top: 10px;
           margin-bottom: 10px;
+          &.active {
+            background: url('/img/btn-bg.gif'),url('/img/side-light-bg.gif');
+            background-size: cover;
+
+          }
         }
       }
       .server-monitor-container {
         padding:0;
-        background:$color-mainframe;
+        background:$color-black;
         height:100%;
         .server-monitor {
-          height:33.33%;
+          //height:33.33%;
+          width:100%;
+          display: inline-block;
+          float: none;
+          clear: both;
           .server-monitor-01 {
             height:80%;
             width:80%;
-            background: url("/img/monitor01.gif")  no-repeat, center;
+            @include bg-cover();
+            background: url("/img/monitor01.gif");
             background-color: $color-screen;
             background-size: cover;
           }
           .server-monitor-02 {
             height:80%;
             width:80%;
-            background: $color-screen url("/img/monitor02.gif") no-repeat center;
+            @include bg-cover();
+            background: $color-screen url("/img/monitor02.gif");
             background-size: cover;
           }
           .server-monitor-03 {
             height:80%;
             width:80%;
-            background: $color-screen url("/img/monitor03.gif") no-repeat center;
+            @include bg-cover();
+            background: $color-screen url("/img/monitor03.gif");
             background-size: cover;
           }
         }
@@ -122,9 +157,18 @@ body {
 
   }
   .server-section-bottom {
-    background: pink;
-
+    @include pixelated();
+    @include bg-cover();
+    background: $color-mainframe url("/img/vent-bottom.gif");
+    background-size: cover;
   }
+}
+#mainframe-content-container {
+  padding-right: 0px;
+}
+
+#mainframe-content-bottom-container {
+  background: $color-black;
 
 }
 
