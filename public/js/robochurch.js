@@ -27,6 +27,7 @@ var $serverVentMiddle = $('.server-vent-middle');
 var $serverVentBottom = $('.server-vent-bottom');
 var $SeverVentSide = $('.server-vent-side');
 var $ServerMonitor = $('.server-monitor');
+var $spinningImage = $('.spinning-img');
 
 // animation settings
 var _SideLightsStatus = 'inactive';
@@ -73,6 +74,7 @@ $(document).ready(function() {
         renderRobochurchCSSMobile();
     } else {
         renderRobochurchCSS();
+        responsiveVoice.speak("Hello World");
     }
 
 });
@@ -134,7 +136,17 @@ function middleVentHTML(){
 
 // TODO: render bottom vent html
 function bottomVentHTML(){
-
+    if($serverSectionBottom.height > $serverSectionBottom.width) {
+        $spinningImage.height($spinningImage.width());
+    } else {
+        $spinningImage.width($spinningImage.height());
+    }
+    console.log($spinningImage.width);
+    var spinningImageMargin = ($spinningImage.width()/2 * -1) + 'px';
+    console.log(spinningImageMargin);
+    var spinningImageMarginCSS = spinningImageMargin + ' 0 0 ' + spinningImageMargin;
+    console.log(spinningImageMarginCSS);
+    $spinningImage.css({"margin": spinningImageMarginCSS, "top": $spinningImage.width()/2 + 'px'});
 }
 
 function renderRobochurchCSS() {
@@ -153,6 +165,7 @@ function renderRobochurchCSS() {
     $contentSectionBottom.height($windowHeight *.25);
     topVentHTML();
     middleVentHTML();
+    bottomVentHTML();
     _SideLightsStatus = 'active';
     activateSideLights();
 }
@@ -176,15 +189,15 @@ function sideLightCycle() {
         // reset lights
         $('.side-light').removeClass('active');
         _ActiveSideLight = 0;
-        console.log('light status: ' + _SideLightsStatus)
+//console.log('light status: ' + _SideLightsStatus)
     } else {
-        console.log('light status: ' + _SideLightsStatus);
+//console.log('light status: ' + _SideLightsStatus);
         var newActiveSideLight = _ActiveSideLight + 1;
         // shortcut because will always restart at 0
         if (_ActiveSideLight >= numSideLights) {
             newActiveSideLight = 0;
         }
-        console.log(newActiveSideLight);
+//console.log(newActiveSideLight);
         // cycle active light
         //$('.side-light-'+_ActiveSideLight).removeClass('active');
         $('.side-light-'+ newActiveSideLight).addClass('active');
